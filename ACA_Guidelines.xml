@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<inspections version="1.0">
+  <option name="myName" value="ACA Guidelines" />
+  <option name="myLocal" value="true" />
+  <inspection_tool class="Eslint" enabled="true" level="ERROR" enabled_by_default="true" />
+  <inspection_tool class="LoggerInitializedWithForeignClass" enabled="false" level="WARNING" enabled_by_default="false">
+    <option name="loggerClassName" value="org.apache.log4j.Logger,org.slf4j.LoggerFactory,org.apache.commons.logging.LogFactory,java.util.logging.Logger" />
+    <option name="loggerFactoryMethodName" value="getLogger,getLogger,getLog,getLogger" />
+  </inspection_tool>
+  <inspection_tool class="SSBasedInspection" enabled="true" level="WARNING" enabled_by_default="true">
+    <replaceConfiguration name="inject with minification" text="inject([$injection$, function($argument$) {&#10;&#9;$statement$;&#10;}]);" recursive="false" caseInsensitive="false" type="JavaScript" reformatAccordingToStyle="true" shortenFQN="true" useStaticImport="true" replacement="inject(function($argument$) {&#10;&#9;$statement$;&#10;});">
+      <constraint name="injection" maxCount="2147483647" within="" contains="" />
+      <constraint name="argument" maxCount="2147483647" within="" contains="" />
+      <constraint name="statement" maxCount="2147483647" within="" contains="" />
+    </replaceConfiguration>
+    <replaceConfiguration name="inject arguments without underscore" text="inject(function($argument$) {&#10;&#9;$assignedVar$ = $argument$;&#10;});" recursive="false" caseInsensitive="false" type="JavaScript" reformatAccordingToStyle="true" shortenFQN="true" useStaticImport="true" replacement="inject(function(_$argument$_) {&#10;&#9;$assignedVar$ = _$argument$_;&#10;});">
+      <constraint name="injection" within="" contains="" />
+      <constraint name="argument" regexp="[^_].*[^_]" within="" contains="" />
+      <constraint name="statement" within="" contains="" />
+      <constraint name="assignedVar" within="" contains="" />
+    </replaceConfiguration>
+    <searchConfiguration name="string constant" text="var $varName$ = $value$;" recursive="false" caseInsensitive="true" type="JavaScript">
+      <constraint name="varName" regexp="([a-z]+)([A-Z][a-z]*)*" within="" contains="" />
+      <constraint name="value" regexp="'(.*)'" within="" contains="" />
+    </searchConfiguration>
+    <searchConfiguration name="array constant" text="var $varName$ = $value$;" recursive="false" caseInsensitive="true" type="JavaScript">
+      <constraint name="varName" regexp="([a-z]+)([A-Z][a-z]*)*" within="" contains="" />
+      <constraint name="value" regexp="\[(.*)\]" within="" contains="" />
+    </searchConfiguration>
+    <replaceConfiguration name="controller non-anonymous function" text="angular.$function1$($parameter1$,[$parameter2$])&#10;&#9;.controller($controllerName$, [$injectionArgument$, function($controllerArgument$) {&#10;&#9;$statement$;&#10;}]);" recursive="false" caseInsensitive="false" type="JavaScript" reformatAccordingToStyle="true" shortenFQN="true" useStaticImport="true" replacement="angular.$function1$($parameter1$,[$parameter2$])&#10;&#9;.controller($controllerName$, [$injectionArgument$, $controllerFunctionName$]);&#10;&#10;function $controllerFunctionName$($controllerArgument$) {&#10;&#9;$statement$;&#10;}">
+      <constraint name="controllerName" within="" contains="" />
+      <constraint name="injectionArgument" maxCount="2147483647" within="" contains="" />
+      <constraint name="controllerArgument" maxCount="2147483647" within="" contains="" />
+      <constraint name="statement" maxCount="2147483647" within="" contains="" />
+      <constraint name="otherFunctions" within="" contains="" />
+      <constraint name="__context__" target="true" within="" contains="" />
+      <constraint name="otherFunction" minCount="0" maxCount="2147483647" within="" contains="" />
+      <constraint name="function1" within="" contains="" />
+      <constraint name="function2" within="" contains="" />
+      <constraint name="parameter1" within="" contains="" />
+      <constraint name="parameter2" within="" contains="" />
+      <variableDefinition name="controllerFunctionName" script="&quot;controllerName.getText().replace(&quot;'&quot;,&quot;&quot;)&quot;" />
+    </replaceConfiguration>
+    <replaceConfiguration name="assertEquals to assertJ" text="assertEquals($expected$, $actual$);" recursive="false" caseInsensitive="false" type="JAVA" reformatAccordingToStyle="true" shortenFQN="true" useStaticImport="true" replacement="org.assertj.core.api.Assertions.assertThat($actual$).isEqualTo($expected$);">
+      <constraint name="expected" within="" contains="" />
+      <constraint name="actual" within="" contains="" />
+    </replaceConfiguration>
+    <replaceConfiguration name="assertSame to assertJ" text="assertSame($expected$, $actual$);" recursive="false" caseInsensitive="false" type="JAVA" reformatAccordingToStyle="true" shortenFQN="true" useStaticImport="true" replacement="org.assertj.core.api.Assertions.assertThat($actual$).isSameAs($expected$);">
+      <constraint name="attachment" within="" contains="" />
+      <constraint name="expected" within="" contains="" />
+      <constraint name="actual" within="" contains="" />
+    </replaceConfiguration>
+    <replaceConfiguration name="assertNull to assertJ" text="assertNull($actual$);" recursive="false" caseInsensitive="false" type="JAVA" reformatAccordingToStyle="true" shortenFQN="true" useStaticImport="true" replacement="org.assertj.core.api.Assertions.assertThat($actual$).isNull();">
+      <constraint name="actual" within="" contains="" />
+    </replaceConfiguration>
+    <replaceConfiguration name="assertFalse to assertJ" text="assertFalse($actual$);" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="true" shortenFQN="true" useStaticImport="true" replacement="org.assertj.core.api.Assertions.assertThat($actual$).isFalse();">
+      <constraint name="actual" within="" contains="" />
+    </replaceConfiguration>
+    <replaceConfiguration name="assertTrue to assertJ" text="assertTrue($actual$);" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="true" shortenFQN="true" useStaticImport="true" replacement="org.assertj.core.api.Assertions.assertThat($actual$).isTrue();">
+      <constraint name="actual" within="" contains="" />
+    </replaceConfiguration>
+    <replaceConfiguration name="assertNotNull to assertJ" text="assertNotNull($actual$);" recursive="false" caseInsensitive="true" type="JAVA" reformatAccordingToStyle="true" shortenFQN="true" useStaticImport="true" replacement="org.assertj.core.api.Assertions.assertThat($actual$).isNotNull();">
+      <constraint name="actual" within="" contains="" />
+    </replaceConfiguration>
+  </inspection_tool>
+</inspections>
+
