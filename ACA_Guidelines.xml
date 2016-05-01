@@ -27,11 +27,11 @@
       <constraint name="varName" regexp="([a-z]+)([A-Z][a-z]*)*" within="" contains="" />
       <constraint name="value" regexp="\[(.*)\]" within="" contains="" />
     </searchConfiguration>
-    <replaceConfiguration name="controller non-anonymous function" text="angular.$function1$($parameter1$,[$parameter2$])&#10;&#9;.controller($controllerName$, [$injectionArgument$, function($controllerArgument$) {&#10;&#9;$statement$;&#10;}]);" recursive="false" caseInsensitive="false" type="JavaScript" reformatAccordingToStyle="true" shortenFQN="true" useStaticImport="true" replacement="angular.$function1$($parameter1$,[$parameter2$])&#10;&#9;.controller($controllerName$, [$injectionArgument$, $controllerFunctionName$]);&#10;&#10;function $controllerFunctionName$($controllerArgument$) {&#10;&#9;$statement$;&#10;}">
+    <replaceConfiguration name="controller non-anonymous function" text="angular.controller($controllerName$, [$injectionArgument$, function($controllerArgument$) {&#10;&#9;$statement$;&#10;}]);" recursive="false" caseInsensitive="false" type="JavaScript" reformatAccordingToStyle="true" shortenFQN="true" useStaticImport="true" replacement="angular.controller($controllerName$, [$injectionArgument$, $controllerFunctionName$]);&#10;&#10;function $controllerFunctionName$($controllerArgument$) {&#10;&#9;$statement$;&#10;}">
       <constraint name="controllerName" within="" contains="" />
       <constraint name="injectionArgument" maxCount="2147483647" within="" contains="" />
       <constraint name="controllerArgument" maxCount="2147483647" within="" contains="" />
-      <constraint name="statement" maxCount="2147483647" within="" contains="" />
+      <constraint name="statement" minCount="0" maxCount="2147483647" within="" contains="" />
       <constraint name="otherFunctions" within="" contains="" />
       <constraint name="__context__" target="true" within="" contains="" />
       <constraint name="otherFunction" minCount="0" maxCount="2147483647" within="" contains="" />
