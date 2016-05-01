@@ -91,6 +91,21 @@ and replaces them with this:
 
 Very limited because it can only handle "angular.controller" calls without any function calls in between (like "module" for example), so not very usable for the moment, since all our controllers are defined in separate modules. Also limited because multiple statements are not allowed in the function body.
 
+###### convert mock to jasmine spy (limited)
+
+looks for mock objects and converts them to jasmine spy objects
+
+	var errorContainerMock = {
+        noError: function() {
+        }
+    };
+    
+becomes
+
+	jasmine.createSpyObj('errorContainerMock', ['noError']);
+	
+Limited because mocking of multiple functions or behaviour is not possible yet
+
 #### Java
 
 ###### assertEquals to assertJ
